@@ -100,7 +100,7 @@ class SQSService:
         now = datetime.utcnow()
         signstamp = now.strftime('%a, %d %b %Y %H:%M:%S GMT')
         timestamp = now.strftime('%Y-%m-%dT%H:%M:%SZ')
-        url = 'https://%s' % self._endpoint
+        url = 'http://%s' % self._endpoint
         method = 'POST'
 
         complement = ''
@@ -218,7 +218,6 @@ class SQSService:
                          'request_id':     get_xml_node_value(xml, 'RequestId') }
 
             if response['message_id']:
-                response['body'] = base64.b64decode(response['body'])
                 callback(response)
             else:
                 callback(None)
